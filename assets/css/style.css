@@ -597,7 +597,7 @@ color: var(--vegas-gold);}
 }
 
 .testimonials-item {
-  min-width: 100%;
+  min-width: 50%;
   scroll-snap-align: center;
 }
 
@@ -764,6 +764,17 @@ color: var(--vegas-gold);}
   min-width: 50%;
   scroll-snap-align: start;
 }
+
+.logo-item-img {
+  height: 220px; /* Set a fixed height */
+  object-fit: contain; /* Ensure the image maintains its aspect ratio */
+  filter: grayscale(1);
+  transition: var(--transition-1);
+  margin: auto;
+}
+
+.logo-item-img:hover { filter: grayscale(0); }
+
 
 .clients-item img {
   width: 150px; /* Set a fixed width */
@@ -1442,6 +1453,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .skills-content-card {
     padding: 30px;
     padding-top: 25px;
+    width:"50%";
   }
 
   .testimonials-avatar-box {

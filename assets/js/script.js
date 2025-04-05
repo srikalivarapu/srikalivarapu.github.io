@@ -140,10 +140,18 @@ for (let i = 0; i < filterBtn.length; i++) {
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");
 const formBtn = document.querySelector("[data-form-btn]");
+const email =  form.querySelector('input[name="email"]').value;
 
 // Function to check form validity and enable/disable button
 function checkFormValidity() {
   let isValid = true;
+
+  if( /(.+)@(.+){2,}\.(.+){2,}/.test(email) ){
+    isValid = true;
+  } else {
+    isValid = false;
+  }
+  
   formInputs.forEach(input => {
     if (!input.checkValidity()) {
       isValid = false;
@@ -161,29 +169,29 @@ formInputs.forEach(input => {
   input.addEventListener("input", checkFormValidity);
 });
 
-// handle form submission
-form.addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevent default form submission
+// // handle form submission
+// form.addEventListener("submit", function(event) {
+//   event.preventDefault(); // Prevent default form submission
 
-  // Extract form data
-  const formData = {
-    fullname: form.querySelector('input[name="fullname"]').value,
-    email: form.querySelector('input[name="email"]').value,
-    message: form.querySelector('textarea[name="message"]').value
-  };
+//   // Extract form data
+//   const formData = {
+//     fullname: form.querySelector('input[name="fullname"]').value,
+//     email: form.querySelector('input[name="email"]').value,
+//     message: form.querySelector('textarea[name="message"]').value
+//   };
 
-  // Send email using EmailJS
-  emailjs.send("service_tlc5o4i", "template_v7gu42s", formData)
-    .then(function(response) {
-      console.log('SUCCESS!', response.status, response.text);
-      alert('Your message has been sent successfully!');
-      form.reset(); // Reset form fields
-      formBtn.setAttribute("disabled", ""); // Disable button again
-    }, function(error) {
-      console.log('FAILED...', error);
-      alert('Failed to send your message. Please try again later.');
-    });
-});
+//   // Send email using EmailJS
+//   emailjs.send("service_tlc5o4i", "template_v7gu42s", formData)
+//     .then(function(response) {
+//       console.log('SUCCESS!', response.status, response.text);
+//       alert('Your message has been sent successfully!');
+//       form.reset(); // Reset form fields
+//       formBtn.setAttribute("disabled", ""); // Disable button again
+//     }, function(error) {
+//       console.log('FAILED...', error);
+//       alert('Failed to send your message. Please try again later.');
+//     });
+// });
 
 // Initial check for form validity
 checkFormValidity();
